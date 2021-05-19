@@ -1,0 +1,7 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "About Me"
+    url: https://suhasg.in/
+  - title: "Github"
+    url: https://github.com/TheRoboticsClub/gsoc2021-Suhas_Gopal
