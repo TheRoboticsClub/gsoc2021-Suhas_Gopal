@@ -29,7 +29,7 @@ github_username:  Suhas-G
 
 # Build settings
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: dark
+minimal_mistakes_skin: sunrise
 plugins:
   - jekyll-feed
   - jekyll-include-cache
