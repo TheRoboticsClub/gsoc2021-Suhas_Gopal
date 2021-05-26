@@ -22,7 +22,7 @@ title: GSOC 2021 - VisualCircuit
 email: suhas.g96.sg@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   GSOC 2021 project for VisualCircuit. The main aim is to implement a circuit editor like web application for composing Robotics applications
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/gsoc2021-Suhas_Gopal" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  Suhas-G
