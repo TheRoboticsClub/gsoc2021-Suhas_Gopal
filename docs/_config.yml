@@ -28,7 +28,8 @@ twitter_username: jekyllrb
 github_username:  Suhas-G
 
 # Build settings
-theme: minimal-mistakes-jekyll
+# theme: minimal-mistakes-jekyll
+remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: sunrise
 plugins:
   - jekyll-feed
