@@ -1,0 +1,9 @@
+@import '../../_variables.scss';
+@import '@szhsin/react-menu/dist/index.css';
+@import '@szhsin/react-menu/dist/theme-dark.css';
+
+.theme-dark {
+    #menu-bar {
+        background-color: $dark-appbar-background;
+    }
+}
