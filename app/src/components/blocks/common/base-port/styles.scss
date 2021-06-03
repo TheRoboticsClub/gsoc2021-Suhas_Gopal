@@ -1,0 +1,40 @@
+#board {
+    .port-container {
+        display: inline-block;
+        .custom-port {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        
+            &.custom-input-port {
+                background-color: red;
+            }
+        
+            &.custom-output-port {
+                background-color: green;
+            }
+        
+            &:hover {
+                cursor: pointer;
+            }
+
+        }
+    }
+}
+
+.theme-dark {
+    #board {
+        .port-container {
+            .custom-port {
+                
+                &.custom-input-port {
+                    background-color: red;
+                }
+            
+                &.custom-output-port {
+                    background-color: green;
+                }
+            }
+        }
+    }
+}

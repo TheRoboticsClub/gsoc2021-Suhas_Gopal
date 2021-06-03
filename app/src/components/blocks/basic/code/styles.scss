@@ -1,0 +1,42 @@
+#board {
+    .block-basic-code {
+
+        width: 350px;
+
+        .block-basic-code-parameters {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-direction: row;
+
+            .block-basic-code-inputs,
+            .block-basic-code-outputs {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .code-output-ports {
+                    margin-right: -10px;
+                }
+            }
+
+            .block-basic-code-textarea {
+                flex: 1;
+                margin: 5px;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+.theme-dark {
+    #board {
+        .block-basic-code {
+            background-color: whitesmoke;
+        }
+    }
+}
