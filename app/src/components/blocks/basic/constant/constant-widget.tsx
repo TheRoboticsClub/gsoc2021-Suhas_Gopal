@@ -26,7 +26,7 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
 
     render() {
         return (
-            <BaseBlock>
+            <BaseBlock selected={this.props.node.isSelected()}>
                 <div>
                     <Card variant='outlined' className="block-basic-constant" raised>
                         <CardContent className='p-0'>

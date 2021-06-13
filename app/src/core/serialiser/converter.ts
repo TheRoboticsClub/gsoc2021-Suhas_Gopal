@@ -1,15 +1,15 @@
 import { DiagramModel } from "@projectstorm/react-diagrams-core";
 import BaseModel from "../../components/blocks/common/base-model";
-import { PortTypes, PROJECT_BOARD_NAME, VERSION } from "../constants";
+import { PortTypes, ProjectInfo, PROJECT_BOARD_NAME, VERSION } from "../constants";
 import { Block, Wire } from "./interfaces";
 
 
 
 
-export function convertToOld(model: DiagramModel) {
+export function convertToOld(model: DiagramModel, projectInfo: ProjectInfo) {
     const data = {
         version: VERSION,
-        package: getPackageData(),
+        package: projectInfo,
         design: {
             board: PROJECT_BOARD_NAME,
             graph: {
@@ -22,16 +22,6 @@ export function convertToOld(model: DiagramModel) {
 
     console.log(data);
     return data;
-}
-
-function getPackageData() {
-    return {
-        'name': '',
-        'version': '',
-        'description': '',
-        'author': '',
-        'image': ''
-    };
 }
 
 function getWires(model: DiagramModel): Wire[] {

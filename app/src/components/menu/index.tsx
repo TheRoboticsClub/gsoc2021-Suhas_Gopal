@@ -55,6 +55,10 @@ function MenuBar(props: MenuBarProps) {
         }
     }
 
+    const editProjectInfo = (_event: ClickEvent) => {
+        editor.editProjectInfo();
+    }
+
     return (
         <AppBar position="static" className='menu-bar' id='menu-bar'>
             <Toolbar >
@@ -66,12 +70,19 @@ function MenuBar(props: MenuBarProps) {
                     <MenuItem onClick={openProject}>Open</MenuItem>
                     <MenuItem onClick={saveProject}>Save as..</MenuItem>
                 </Menu>
+                <Menu
+                    menuButton={<Button className='menu-button'>Edit</Button>}
+                    theming={isDark ? 'dark': undefined}>
+                    <MenuItem onClick={editProjectInfo}>Edit Project Information</MenuItem>
+                </Menu>
                 <div style={{ flex: 1 }} />
                 <Menu
                     menuButton={<Button className='menu-button'>Basic</Button>}
                     theming={isDark ? 'dark': undefined}>
                     <MenuItem onClick={() => setBlock('basic.constant')}>Constant</MenuItem>
                     <MenuItem onClick={() => setBlock('basic.code')}>Code</MenuItem>
+                    <MenuItem onClick={() => setBlock('basic.input')}>Input</MenuItem>
+                    <MenuItem onClick={() => setBlock('basic.output')}>Output</MenuItem>
                     <MenuItem onClick={() => setBlock('basic.information')}>Information</MenuItem>
                 </Menu>
 

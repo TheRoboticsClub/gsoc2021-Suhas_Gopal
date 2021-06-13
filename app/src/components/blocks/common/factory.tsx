@@ -4,8 +4,11 @@ import { DefaultPortModel, DefaultPortModelOptions } from "@projectstorm/react-d
 import { RightAngleLinkModel } from "@projectstorm/react-diagrams-routing";
 import createCodeDialog from '../../dialogs/code-block-dialog';
 import createConstantDialog from "../../dialogs/constant-block-dialog";
+import createIODialog from '../../dialogs/input-output-block-dialog';
 import { CodeBlockModel } from "../basic/code/code-model";
 import { ConstantBlockModel } from "../basic/constant/constant-model";
+import { InputBlockModel } from '../basic/input/input-model';
+import { OutputBlockModel } from '../basic/output/output-model';
 
 
 export class RightAnglePortModel extends DefaultPortModel {
@@ -22,7 +25,7 @@ export class RightAnglePortModel extends DefaultPortModel {
 }
 
 export const createPortModel = (options: DefaultPortModelOptions) => {
-    return new DefaultPortModel(options);
+    return new RightAnglePortModel(options);
 } 
 
 export const createBlock = async (name: string) => {
@@ -37,6 +40,14 @@ export const createBlock = async (name: string) => {
             case 'basic.code':
                 data = await createCodeDialog({isOpen: true});
                 block = new CodeBlockModel(data);
+                break;
+            case 'basic.input':
+                data = await createIODialog({isOpen: true});
+                block = new InputBlockModel(data);
+                break;
+            case 'basic.output':
+                data = await createIODialog({isOpen: true});
+                block = new OutputBlockModel(data);
                 break;
             default:
                 break;
