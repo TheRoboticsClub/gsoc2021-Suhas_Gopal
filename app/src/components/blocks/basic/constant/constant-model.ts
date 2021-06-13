@@ -1,52 +1,59 @@
 import { NodeModelGenerics } from "@projectstorm/react-diagrams";
-import { NodeModel, PortModel, PortModelAlignment } from "@projectstorm/react-diagrams-core";
+import { PortModel, PortModelAlignment } from "@projectstorm/react-diagrams-core";
 import { DeserializeEvent } from '@projectstorm/react-canvas-core';
 import { BaseModelOptions } from '@projectstorm/react-canvas-core';
 import { createPortModel } from "../../common/factory";
+import BaseModel from "../../common/base-model";
+import { PortTypes } from "../../../../core/constants";
 
 export interface ConstantBlockModelOptions extends BaseModelOptions {
     name: string;
 }
 
-export class ConstantBlockModel extends NodeModel<NodeModelGenerics & ConstantBlockModelOptions> {
-    public name: string;
-    public value: any;
+interface ConstantBlockData {
+    name: string;
+    value: string
+}
+
+export class ConstantBlockModel extends BaseModel<ConstantBlockData, NodeModelGenerics & ConstantBlockModelOptions> {
 
     constructor(options: ConstantBlockModelOptions) {
 		super({
 			...options,
 			type: 'basic.constant'
 		});
-        this.name = options.name;
-        
-        
+
+        this.data = {
+            name: options.name,
+            value: '',
+            local: false
+        }
 
         this.addPort(
 			createPortModel({
 				in: false,
-				name: 'out',
+				name: 'constant-out',
                 alignment: PortModelAlignment.BOTTOM,
-                label: 'out'
+                label: 'constant-out',
+                type: PortTypes.OUTPUT
 			})
 		);
     }
 
     getPort(): PortModel {
-        return super.getPort('out')!;
+        return super.getPort('constant-out')!;
     }
 
     serialize() {
         return {
             ...super.serialize(),
-            name: this.name,
-            value: this.value
+            data: this.getData()
         }
     }
 
     deserialize(event: DeserializeEvent<this>): void {
         super.deserialize(event);
-        this.name = event.data.name;
-        this.value = event.data.value;
+        this.data = event.data.data;
     }
 
 }

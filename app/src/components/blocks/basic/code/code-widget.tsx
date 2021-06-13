@@ -1,6 +1,6 @@
 import { Card, CardContent, TextareaAutosize } from '@material-ui/core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
-import React, { ChangeEvent, MouseEventHandler } from 'react';
+import React, { ChangeEvent, MouseEventHandler, WheelEventHandler } from 'react';
 import BaseBlock from '../../common/base-block';
 import BasePort from '../../common/base-port';
 import { CodeBlockModel } from './code-model';
@@ -20,7 +20,7 @@ export class CodeBlockWidget extends React.Component<CodeBlockWidgetProps, CodeB
     constructor(props: CodeBlockWidgetProps) {
         super(props);
         this.state = {
-            code: this.props.node.code || ''
+            code: this.props.node.data.code || ''
         };
     }
 
@@ -55,14 +55,24 @@ export class CodeBlockWidget extends React.Component<CodeBlockWidgetProps, CodeB
                                         );
                                     })}
                                 </div>
-                                <TextareaAutosize 
-                                    aria-label="code-block" 
-                                    rowsMin={10}
-                                    className='block-basic-code-textarea'
-                                    value={this.state.code}
-                                    onChange={this.handleInput}
-                                    onMouseDown={this.blockMouseEvents}
-                                />
+                                <div className='block-basic-code-textarea-container'>
+                                    {/* <TextareaAutosize 
+                                        aria-label="code-block" 
+                                        rowsMin={10}
+                                        className='block-basic-code-textarea'
+                                        value={this.state.code}
+                                        onChange={this.handleInput}
+                                        onMouseDown={this.blockMouseEvents}
+                                    /> */}
+                                    <textarea 
+                                        aria-label='code-block'
+                                        className='block-basic-code-textarea'
+                                        value={this.state.code}
+                                        onChange={this.handleInput}
+                                        onMouseDown={this.blockMouseEvents}
+                                        onWheel={this.blockScrollEvents}
+                                    />
+                                </div>
                                 <div className='block-basic-code-outputs'>
                                     {this.props.node.getOutputs().map((port) => {
                                         return (
@@ -86,10 +96,16 @@ export class CodeBlockWidget extends React.Component<CodeBlockWidgetProps, CodeB
 
     handleInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({ code: event.target.value });
-        this.props.node.code = event.target.value;
+        this.props.node.data.code = event.target.value;
     }
 
     blockMouseEvents: MouseEventHandler<HTMLTextAreaElement> = (event) => {
         event.stopPropagation();
     }
+
+    blockScrollEvents: WheelEventHandler<HTMLTextAreaElement> = (event) => {
+        event.stopPropagation();
+    }
+
+
 }
