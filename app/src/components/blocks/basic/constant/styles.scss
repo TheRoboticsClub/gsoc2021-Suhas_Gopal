@@ -16,8 +16,8 @@
 
 #board {
     .block-basic-constant {
-        min-width: 120px;
-        min-height: 120px;
+        width: 120px;
+        min-height: 80px;
     
         .block-basic-constant-input {
             margin-left: 1em;

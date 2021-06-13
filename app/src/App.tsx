@@ -1,5 +1,6 @@
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
+import ModalContainer from 'react-modal-promise';
 import './App.scss';
 import MenuBar from './components/menu';
 import Editor from './core/editor';
@@ -22,6 +23,7 @@ function App() {
         <MenuBar editor={editor}/>
         <Board editor={editor}/>
       </div>
+      <ModalContainer />
     </ThemeProvider>
   );
 }

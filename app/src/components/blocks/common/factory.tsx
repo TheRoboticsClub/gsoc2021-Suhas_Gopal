@@ -1,9 +1,12 @@
+import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
 import { LinkModel, PortModel } from "@projectstorm/react-diagrams";
 import { DefaultPortModel, DefaultPortModelOptions } from "@projectstorm/react-diagrams-defaults";
 import { RightAngleLinkModel } from "@projectstorm/react-diagrams-routing";
+import createCodeDialog from '../../dialogs/code-block-dialog';
+import createConstantDialog from "../../dialogs/constant-block-dialog";
 import { CodeBlockModel } from "../basic/code/code-model";
 import { ConstantBlockModel } from "../basic/constant/constant-model";
-import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
+
 
 export class RightAnglePortModel extends DefaultPortModel {
 	createLinkModel(_factory?: AbstractModelFactory<LinkModel>): LinkModel {
@@ -22,21 +25,24 @@ export const createPortModel = (options: DefaultPortModelOptions) => {
     return new DefaultPortModel(options);
 } 
 
-export const createBlock = (name: string) => {
+export const createBlock = async (name: string) => {
     var block;
-    switch (name) {
-        case 'basic.constant':
-            block = new ConstantBlockModel({name: 'Frequency'})
-            break;
-        case 'basic.code':
-            block = new CodeBlockModel({
-                inputs: ['Frequency'],
-                outputs: ['Print'],
-                parameters: ['Multiplier']
-            });
-            break;
-        default:
-            break;
+    var data;
+    try {
+        switch (name) {
+            case 'basic.constant':
+                data = await createConstantDialog({isOpen: true});
+                block = new ConstantBlockModel(data)
+                break;
+            case 'basic.code':
+                data = await createCodeDialog({isOpen: true});
+                block = new CodeBlockModel(data);
+                break;
+            default:
+                break;
+        }
+    } catch (error) {
+        console.log(error);
     }
     return block;
 }

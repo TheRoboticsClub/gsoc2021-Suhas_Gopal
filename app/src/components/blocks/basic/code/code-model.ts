@@ -1,90 +1,129 @@
 import { NodeModelGenerics } from "@projectstorm/react-diagrams";
-import { NodeModel, PortModelAlignment } from "@projectstorm/react-diagrams-core";
+import { PortModelAlignment } from "@projectstorm/react-diagrams-core";
 import { DeserializeEvent } from '@projectstorm/react-canvas-core';
 import { BaseModelOptions } from '@projectstorm/react-canvas-core';
 import { createPortModel } from "../../common/factory";
+import BaseModel from "../../common/base-model";
+import { PortName } from "../../../../core/serialiser/interfaces";
+import { PortTypes } from "../../../../core/constants";
 
 export interface CodeBlockModelOptions extends BaseModelOptions {
     inputs?: string[];
     outputs?: string[];
-    parameters?: string[];
+    params?: string[];
 }
 
-export class CodeBlockModel extends NodeModel<NodeModelGenerics & CodeBlockModelOptions> {
-    public code: string;
-    private inputs: string[];
-    private outputs: string[];
-    private parameters: string[];
+interface CodeBlockData {
+    code: string;
+    params?: PortName[],
+    ports: {
+        in: PortName[],
+        out: PortName[]
+    }
+}
+
+export class CodeBlockModel extends BaseModel<CodeBlockData, NodeModelGenerics & CodeBlockModelOptions> {
+
 
     constructor(options: CodeBlockModelOptions) {
         super({
             ...options,
             type: 'basic.code'
         });
-        this.code = '';
-        this.inputs = options.inputs || [];
-        this.outputs = options.outputs || [];
-        this.parameters = options.parameters || [];
         
-        this.inputs.forEach((port) => {
+        this.data = {
+            code: '',
+            params: options.params?.map((port) => {
+                return {name: port}
+            }) || [],
+            ports: {
+                in: options.inputs?.map((port) => {
+                    return {name: port}
+                }) || [],
+                out: options.outputs?.map((port) => {
+                    return {name: port}
+                }) || []
+            }
+        }
+
+        // if (options.params && options.params.length) {
+        //     this.data.params = options.params?.map((port) => {
+        //         return {name: port}
+        //     });
+        // }
+
+        // if (options.inputs && options.inputs.length) {
+        //     this.data.ports['in'] = options.inputs.map((port) => {
+        //         return {name: port}
+        //     });
+        // }
+
+        // if (options.outputs && options.outputs.length) {
+        //     this.data.ports['out'] = options.outputs.map((port) => {
+        //         return {name: port}
+        //     });
+        // }
+        
+        options.inputs?.forEach((port) => {
             this.addPort(
                 createPortModel({
                     in: true,
                     name: port,
                     alignment: PortModelAlignment.LEFT,
+                    type: PortTypes.INPUT
                 })
             );
         });
 
-        this.outputs.forEach((port) => {
+        options.outputs?.forEach((port) => {
             this.addPort(
                 createPortModel({
                     in: false,
                     name: port,
-                    alignment: PortModelAlignment.RIGHT
+                    alignment: PortModelAlignment.RIGHT,
+                    type: PortTypes.OUTPUT
                 })
             )
         });
 
-        this.parameters.forEach((port) => {
+        options.params?.forEach((port) => {
             this.addPort(
                 createPortModel({
                     in: true,
                     name: port,
-                    alignment: PortModelAlignment.TOP
+                    alignment: PortModelAlignment.TOP,
+                    type: PortTypes.PARAM
                 })
             )
         });
     }
 
     getInputs() {
-        return this.inputs.map((port) => this.getPort(port));
+        return this.getData().ports.in?.map((port) => this.getPort(port.name)) || [];
     }
 
     getOutputs() {
-        return this.outputs.map((port) => this.getPort(port));
+        return this.getData().ports.out?.map((port) => this.getPort(port.name)) || [];
     }
 
     getParameters() {
-        return this.parameters.map((port) => this.getPort(port));
+        return this.getData().params?.map((port) => this.getPort(port.name)) || [];
+    }
+
+    getData(): CodeBlockData {
+        return this.data;
     }
 
     serialize() {
         return {
             ...super.serialize(),
-            code: this.code,
-            inputs: this.inputs,
-            parameters: this.parameters,
-            outputs: this.outputs
+            data : this.getData()
         }
     }
 
     deserialize(event: DeserializeEvent<this>): void {
         super.deserialize(event);
-        this.code = event.data.code;
-        this.inputs = event.data.inputs;
-        this.parameters = event.data.parameters;
-        this.outputs = event.data.outputs;
+        this.data = event.data.data;
     }
 
 }

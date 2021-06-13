@@ -20,7 +20,7 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
     constructor(props: ConstantBlockWidgetProps) {
         super(props);
         this.state = {
-            value: this.props.node.value || ''
+            value: this.props.node.data.value || ''
         };
     }
 
@@ -30,7 +30,7 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
                 <div>
                     <Card variant='outlined' className="block-basic-constant" raised>
                         <CardContent className='p-0'>
-                            <p className='text-center'>{this.props.node.name}</p>
+                            <p className='text-center'>{this.props.node.data.name}</p>
                             <div className='block-basic-constant-input'>
                                 <TextField 
                                     variant="outlined" 
@@ -56,6 +56,8 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
 
     handleInput = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({ value: event.target.value });
-        this.props.node.value = event.target.value;
+        if (this.props.node.data) {
+            this.props.node.data.value = event.target.value
+        }
     }
 }

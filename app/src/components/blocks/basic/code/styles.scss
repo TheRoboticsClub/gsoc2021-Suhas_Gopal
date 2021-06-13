@@ -1,7 +1,7 @@
 #board {
     .block-basic-code {
+        max-height: 400px;
 
-        width: 350px;
 
         .block-basic-code-parameters {
             display: flex;
@@ -24,11 +24,20 @@
                 }
             }
 
-            .block-basic-code-textarea {
+            .block-basic-code-textarea-container {
                 flex: 1;
                 margin: 5px;
-                border-radius: 5px;
+                overflow-y: auto;
+
+                .block-basic-code-textarea {
+                    
+                    border-radius: 5px;
+                    
+                }
+
             }
+
+            
         }
     }
 }

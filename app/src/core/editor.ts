@@ -2,6 +2,7 @@ import createEngine, { DiagramEngine, DiagramModel, RightAngleLinkFactory } from
 import { CodeBlockFactory } from "../components/blocks/basic/code/code-factory";
 import { ConstantBlockFactory } from "../components/blocks/basic/constant/constant-factory";
 import { createBlock, getInitialPosition } from "../components/blocks/common/factory";
+import { convertToOld } from "./serialiser/converter";
 
 class Editor {
  
@@ -37,11 +38,13 @@ class Editor {
     }
 
     public loadProject(jsonModel: any) {
-        // console.log(jsonModel);
         const model = new DiagramModel();
-        model.deserializeModel(jsonModel, this.engine);
-        this.activeModel = model;
-        this.engine.setModel(model)
+        const editor = jsonModel.editor;
+        if (editor) {
+            model.deserializeModel(editor, this.engine);
+            this.activeModel = model;
+            this.engine.setModel(model)
+        }
     }
 
     public clearProject(): void {
@@ -50,15 +53,16 @@ class Editor {
     }
 
     public serialise(): {[k: string]: any} {
-        return this.activeModel.serialize();
+        const data = convertToOld(this.activeModel);
+        return { editor : this.activeModel.serialize(), ...data};
     }
 
     public getName(): string {
         return this.currentProjectName;
     }
 
-    public addBlock(name: string): void {
-        const block = createBlock(name);
+    public async addBlock(name: string): Promise<void> {
+        const block = await createBlock(name);
         if (block) {
             block.setPosition(...getInitialPosition())
             this.activeModel.addNode(block);
