@@ -8,3 +8,11 @@ export enum PortTypes {
     OUTPUT = 'port.output',
     PARAM = 'port.parameter' 
 }
+
+export interface ProjectInfo {
+    name: string;
+    version: string;
+    description: string;
+    author: string;
+    image: string;
+}
