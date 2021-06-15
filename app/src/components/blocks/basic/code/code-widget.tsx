@@ -26,7 +26,7 @@ export class CodeBlockWidget extends React.Component<CodeBlockWidgetProps, CodeB
 
     render() {
         return (
-            <BaseBlock>
+            <BaseBlock selected = {this.props.node.isSelected()}>
                 <div>
                     <Card variant='outlined' className="block-basic-code" raised>
                         <CardContent className='p-0'>
