@@ -22,3 +22,11 @@ export interface Block {
     },
     data: any
 }
+
+export interface ProjectDesign {
+    board: string;
+    graph: {
+        blocks: Block[];
+        wires: Wire[];
+    }
+}

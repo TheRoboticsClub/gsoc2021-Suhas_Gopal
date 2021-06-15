@@ -1,8 +1,8 @@
+import { AbstractReactFactory, GenerateModelEvent, GenerateWidgetEvent } from '@projectstorm/react-canvas-core';
+import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import React from 'react';
 import { CodeBlockModel, CodeBlockModelOptions } from './code-model';
 import { CodeBlockWidget } from './code-widget';
-import { AbstractReactFactory, GenerateModelEvent, GenerateWidgetEvent } from '@projectstorm/react-canvas-core';
-import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 
 
 export class CodeBlockFactory extends AbstractReactFactory<CodeBlockModel, DiagramEngine> {

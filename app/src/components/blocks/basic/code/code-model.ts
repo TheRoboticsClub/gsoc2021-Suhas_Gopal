@@ -1,11 +1,10 @@
+import { BaseModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
 import { NodeModelGenerics } from "@projectstorm/react-diagrams";
 import { PortModelAlignment } from "@projectstorm/react-diagrams-core";
-import { DeserializeEvent } from '@projectstorm/react-canvas-core';
-import { BaseModelOptions } from '@projectstorm/react-canvas-core';
-import { createPortModel } from "../../common/factory";
-import BaseModel from "../../common/base-model";
-import { PortName } from "../../../../core/serialiser/interfaces";
 import { PortTypes } from "../../../../core/constants";
+import { PortName } from "../../../../core/serialiser/interfaces";
+import BaseModel from "../../common/base-model";
+import { createPortModel } from "../../common/factory";
 
 export interface CodeBlockModelOptions extends BaseModelOptions {
     inputs?: string[];
@@ -30,40 +29,27 @@ export class CodeBlockModel extends BaseModel<CodeBlockData, NodeModelGenerics &
             ...options,
             type: 'basic.code'
         });
-        
+
         this.data = {
             code: '',
             params: options.params?.map((port) => {
-                return {name: port}
+                return { name: port }
             }) || [],
             ports: {
                 in: options.inputs?.map((port) => {
-                    return {name: port}
+                    return { name: port }
                 }) || [],
                 out: options.outputs?.map((port) => {
-                    return {name: port}
+                    return { name: port }
                 }) || []
+            },
+            size: {
+                width: '',
+                height: ''
             }
         }
 
-        // if (options.params && options.params.length) {
-        //     this.data.params = options.params?.map((port) => {
-        //         return {name: port}
-        //     });
-        // }
 
-        // if (options.inputs && options.inputs.length) {
-        //     this.data.ports['in'] = options.inputs.map((port) => {
-        //         return {name: port}
-        //     });
-        // }
-
-        // if (options.outputs && options.outputs.length) {
-        //     this.data.ports['out'] = options.outputs.map((port) => {
-        //         return {name: port}
-        //     });
-        // }
-        
         options.inputs?.forEach((port) => {
             this.addPort(
                 createPortModel({
@@ -114,10 +100,19 @@ export class CodeBlockModel extends BaseModel<CodeBlockData, NodeModelGenerics &
         return this.data;
     }
 
+    setSize(width: number, height: number): void {
+        const size = {
+            width: width.toString() + 'px',
+            height: height.toString() + 'px'
+        }
+        this.data.size = size;
+
+    }
+
     serialize() {
         return {
             ...super.serialize(),
-            data : this.getData()
+            data: this.getData()
         }
     }
 

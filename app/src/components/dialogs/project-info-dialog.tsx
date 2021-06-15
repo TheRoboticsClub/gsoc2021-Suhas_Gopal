@@ -1,11 +1,11 @@
-import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, TextField, Input } from '@material-ui/core';
-import React, { useState, ChangeEvent } from 'react';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, TextField } from '@material-ui/core';
+import React, { ChangeEvent, useState } from 'react';
 import { create, InstanceProps } from 'react-modal-promise';
 import { ProjectInfo } from '../../core/constants';
 
-interface ProjectInfoDialogProps extends InstanceProps<ProjectInfo>, Partial<ProjectInfo>{};
+interface ProjectInfoDialogProps extends InstanceProps<ProjectInfo>, Partial<ProjectInfo> { };
 
-const ProjectInfoDialog = ({ isOpen, onResolve, onReject, 
+const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
     name, version, description, author, image }: ProjectInfoDialogProps) => {
 
 
@@ -24,7 +24,7 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
 
     const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.length ? event.target.files[0] : null;
-        
+
         if (file) {
             fileReader.readAsDataURL(file);
         }
@@ -41,10 +41,10 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
     }
 
     return (
-        <Dialog 
+        <Dialog
             open={isOpen}
             fullWidth={true}
-            maxWidth='md'                
+            maxWidth='md'
             aria-labelledby="form-dialog-title">
 
             <DialogContent>
@@ -62,7 +62,7 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
                 />
 
                 <DialogContentText>
-                    Version 
+                    Version
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -75,7 +75,7 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
                 />
 
                 <DialogContentText>
-                    Description 
+                    Description
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -88,7 +88,7 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
                 />
 
                 <DialogContentText>
-                    Author 
+                    Author
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -100,34 +100,34 @@ const ProjectInfoDialog = ({ isOpen, onResolve, onReject,
                     fullWidth
                 />
                 <DialogContentText>
-                    Image 
+                    Image
                 </DialogContentText>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div style={{flex: 1}}>
-                        <Button 
-                        variant="outlined"
-                        component="label"
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                        <Button
+                            variant="outlined"
+                            component="label"
                         >
-                        Upload File
-                        <input
-                            type="file"
-                            accept='.svg' 
-                            onChange={onFileUpload}
-                            hidden
-                        />
+                            Upload File
+                            <input
+                                type="file"
+                                accept='.svg'
+                                onChange={onFileUpload}
+                                hidden
+                            />
                         </Button>
                     </div>
-                    {imageInput && 
-                    <img src={imageInput} style={{width: '80px', height: '80px'}}/>}
+                    {imageInput &&
+                        <img src={imageInput} style={{ width: '80px', height: '80px' }} alt='block icon' />}
                 </div>
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onReject()}>
                     Cancel
-          </Button>
+                </Button>
                 <Button onClick={() => handleSubmit()}>
                     Ok
-          </Button>
+                </Button>
             </DialogActions>
         </Dialog>
     )

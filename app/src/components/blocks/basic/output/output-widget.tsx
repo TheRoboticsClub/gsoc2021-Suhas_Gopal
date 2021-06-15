@@ -5,8 +5,8 @@ import React from "react";
 import BaseBlock from "../../common/base-block";
 import BasePort from "../../common/base-port";
 import { OutputBlockModel } from "./output-model";
-
 import './styles.scss';
+
 
 export interface OutputBlockWidgetProps {
     node: OutputBlockModel;
@@ -14,9 +14,6 @@ export interface OutputBlockWidgetProps {
 }
 
 export class OutputBlockWidget extends React.Component<OutputBlockWidgetProps> {
-    constructor(props: OutputBlockWidgetProps) {
-        super(props);
-    }
 
     render() {
         return (

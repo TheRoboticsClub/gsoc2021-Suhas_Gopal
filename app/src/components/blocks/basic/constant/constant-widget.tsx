@@ -1,6 +1,7 @@
 import { Card, CardContent, TextField } from '@material-ui/core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import React, { ChangeEvent } from 'react';
+import { GlobalState } from '../../../../core/store';
 import BaseBlock from '../../common/base-block';
 import BasePort from '../../common/base-port';
 import { ConstantBlockModel } from './constant-model';
@@ -17,6 +18,9 @@ export interface ConstantBlockWidgetState {
 }
 
 export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProps, ConstantBlockWidgetState> {
+
+    static contextType = GlobalState;
+
     constructor(props: ConstantBlockWidgetProps) {
         super(props);
         this.state = {
@@ -25,6 +29,7 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
     }
 
     render() {
+        const { state } = this.context;
         return (
             <BaseBlock selected={this.props.node.isSelected()}>
                 <div>
@@ -32,18 +37,22 @@ export class ConstantBlockWidget extends React.Component<ConstantBlockWidgetProp
                         <CardContent className='p-0'>
                             <p className='text-center'>{this.props.node.data.name}</p>
                             <div className='block-basic-constant-input'>
-                                <TextField 
-                                    variant="outlined" 
-                                    onChange={this.handleInput} 
-                                    value={this.state.value} 
-                                    size='small' />
+                                <TextField
+                                    variant="outlined"
+                                    onChange={this.handleInput}
+                                    value={this.state.value}
+                                    size='small'
+                                    InputProps={{
+                                        readOnly: state.locked,
+                                    }}
+                                />
                             </div>
-                            <div style={{display: 'flex', justifyContent:'center'}}>
-                            <BasePort className='constant-output-port'
-                                port={this.props.node.getPort()} 
-                                engine={this.props.engine} 
-                                isInput={false}>
-                            </BasePort>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <BasePort className='constant-output-port'
+                                    port={this.props.node.getPort()}
+                                    engine={this.props.engine}
+                                    isInput={false}>
+                                </BasePort>
                             </div>
 
                         </CardContent>
