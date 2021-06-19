@@ -19,7 +19,7 @@ class Editor {
     private currentProjectName: string;
     private projectInfo: ProjectInfo;
     
-    private stack: DiagramModel[];
+    private stack: {model: DiagramModel, info: ProjectInfo, node: PackageBlockModel}[];
     private activeModel: DiagramModel;
 
     public engine: DiagramEngine;
@@ -98,7 +98,13 @@ class Editor {
     }
 
     public async editProjectInfo(): Promise<void> {
-        this.projectInfo = await createProjectInfoDialog({isOpen: true, ...this.projectInfo});
+        createProjectInfoDialog({isOpen: true, ...this.projectInfo})
+        .then((data) => {
+            this.projectInfo = data; 
+        })
+        .catch(() => {
+            console.log('Project Info dialog closed');
+        });
     }
 
     public addAsBlock(jsonModel: any) {
@@ -111,7 +117,7 @@ class Editor {
     }
 
     public openPackage(node: PackageBlockModel) {
-        this.stack.push(this.activeModel);
+        this.stack.push({model: this.activeModel, info: this.projectInfo, node: node});
         const model = new DiagramModel();
         const editor = node.model;
         if (editor) {
@@ -139,7 +145,11 @@ class Editor {
 
     public goToPreviousModel() {
         if (this.stack.length) {
-            this.activeModel = this.stack.pop()!;
+            const data = convertToOld(this.activeModel, this.projectInfo);
+            const {model, info, node} = this.stack.pop()!;
+            node.design = data.design;
+            this.activeModel = model;
+            this.projectInfo = info;
             this.engine.setModel(this.activeModel);
         }
     }

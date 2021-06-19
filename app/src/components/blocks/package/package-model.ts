@@ -19,6 +19,7 @@ export class PackageBlockModel extends BaseModel<PackageBlockData, NodeModelGene
 
     public model: any;
     public info: ProjectInfo;
+    public design: ProjectDesign;
     private inputs: string[] = [];
     private outputs: string[] = [];
 
@@ -29,6 +30,7 @@ export class PackageBlockModel extends BaseModel<PackageBlockData, NodeModelGene
 		});
         this.model = options.model;
         this.info = options.info;
+        this.design = options.design;
         options.design.graph.blocks.forEach((block) => {
             if (block.type === 'basic.input') {
                 this.addPort(
@@ -71,13 +73,19 @@ export class PackageBlockModel extends BaseModel<PackageBlockData, NodeModelGene
     serialize() {
         return {
             ...super.serialize(),
-            data: this.getData()
+            data: this.getData(),
+            model: this.model,
+            info: this.info,
+            design: this.design
         }
     }
 
     deserialize(event: DeserializeEvent<this>): void {
         super.deserialize(event);
         this.data = event.data.data;
+        this.model = event.data.model;
+        this.info = event.data.info;
+        this.design = event.data.design;
     }
 
 }
