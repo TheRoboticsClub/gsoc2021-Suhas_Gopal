@@ -11,6 +11,7 @@ import { CodeBlockModel } from "../basic/code/code-model";
 import { ConstantBlockModel } from "../basic/constant/constant-model";
 import { InputBlockModel } from '../basic/input/input-model';
 import { OutputBlockModel } from '../basic/output/output-model';
+import { getCollectionBlock } from '../collection/collection-factory';
 import { PackageBlockModel } from '../package/package-model';
 
 
@@ -54,6 +55,8 @@ export const createBlock = async (name: string) => {
                 block = new OutputBlockModel(data);
                 break;
             default:
+                data = await getCollectionBlock(name);
+                block = loadPackage(data);
                 break;
         }
     } catch (error) {
