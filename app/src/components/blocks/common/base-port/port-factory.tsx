@@ -1,22 +1,39 @@
-import { DefaultPortFactory } from "@projectstorm/react-diagrams-defaults";
+import { DiagramEngine } from "@projectstorm/react-diagrams";
+import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
+import { BaseInputPortModel, BaseOutputPortModel, BaseParameterPortModel } from "./port-model";
 
-export class BaseInputPortFactory extends DefaultPortFactory {
+export class BaseInputPortFactory extends AbstractModelFactory<BaseInputPortModel, DiagramEngine> {
     constructor() {
-        super();
-        this.type = 'port.input';
-    }
+		super('port.input');
+	}
+
+	generateModel(): BaseInputPortModel {
+		return new BaseInputPortModel({
+			name: 'unknown'
+		});
+	}
 }
 
-export class BaseOutputPortFactory extends DefaultPortFactory {
+export class BaseOutputPortFactory extends AbstractModelFactory<BaseOutputPortModel, DiagramEngine> {
     constructor() {
-        super();
-        this.type = 'port.output';
-    }
+		super('port.output');
+	}
+
+	generateModel(): BaseOutputPortModel {
+		return new BaseOutputPortModel({
+			name: 'unknown'
+		});
+	}
 }
 
-export class BaseParameterPortFactory extends DefaultPortFactory {
+export class BaseParameterPortFactory extends AbstractModelFactory<BaseParameterPortModel, DiagramEngine> {
     constructor() {
-        super();
-        this.type = 'port.parameter';
-    }
+		super('port.parameter');
+	}
+
+	generateModel(): BaseParameterPortModel {
+		return new BaseParameterPortModel({
+			name: 'unknown'
+		});
+	}
 }

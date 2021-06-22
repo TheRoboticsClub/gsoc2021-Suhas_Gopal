@@ -12,20 +12,17 @@ export const collectionBlocks: { 'blocks': CollectionBlockType } = {
             'children': {
                 'blur': { 'label': 'Blur' },
                 'camera': { 'label': 'Camera' },
-                'screen': { 'label': 'Screen' }
+                'screen': { 'label': 'Screen' },
+                'edgeDetector': {'label': 'Edge Detector'},
+                'videoStreamer': {'label': 'Video Streamer'}
+            }
+        },
+        'tensorflow': {
+            'label': 'TensorFlow',
+            'children': {
+                'objectDetector': {'label': 'Object Detector'}
             }
         }
-        // 'tensorflow': {
-        //     'label': 'TensorFlow',
-        //     'children': {
-        //         'object': {
-        //             'label': 'Object Detection',
-        //             'children': {
-        //                 'lane': { 'label': 'Lane Detection' }
-        //             }
-        //         }
-        //     }
-        // }
     }
 }
 
@@ -39,6 +36,12 @@ export function getCollectionBlock(name: string) {
             return import('./opencv/Camera.json');
         case 'blocks.opencv.screen':
             return import('./opencv/Screen.json');
+        case 'blocks.opencv.edgeDetector':
+            return import('./opencv/EdgeDetector.json');
+        case 'blocks.opencv.videoStreamer':
+            return import('./opencv/VideoStreamer.json');
+        case 'blocks.tensorflow.objectDetector':
+            return import('./tensorflow/ObjectDetector.json');
         default:
             break;
     }
