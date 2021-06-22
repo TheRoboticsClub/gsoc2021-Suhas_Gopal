@@ -6,7 +6,7 @@
         .block-basic-code-parameters {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: space-evenly;
         }
 
         .grid-container {
@@ -17,7 +17,7 @@
             .block-basic-code-outputs {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-evenly;
 
                 .code-output-ports {
                     margin-right: -10px;

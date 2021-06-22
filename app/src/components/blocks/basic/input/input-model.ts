@@ -6,7 +6,7 @@ import { createPortModel } from '../../common/factory';
 
 export interface InputBlockModelOptions extends BaseModelOptions {
     name: string;
-} 
+}
 
 interface InputBlockData {
     name: string;
@@ -15,23 +15,23 @@ interface InputBlockData {
 export class InputBlockModel extends BaseModel<InputBlockData, NodeModelGenerics & InputBlockModelOptions> {
 
     constructor(options: InputBlockModelOptions) {
-		super({
-			...options,
-			type: 'basic.input'
-		});
+        super({
+            ...options,
+            type: 'basic.input'
+        });
 
         this.data = {
             name: options.name
         }
         this.addPort(
-			createPortModel({
-				in: false,
-				name: 'input-out',
+            createPortModel({
+                in: false,
+                name: 'input-out',
                 alignment: PortModelAlignment.RIGHT,
                 label: 'input-out',
                 type: PortTypes.OUTPUT
-			})
-		);
+            })
+        );
     }
 
     getPort(): PortModel {

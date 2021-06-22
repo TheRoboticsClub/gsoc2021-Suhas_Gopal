@@ -1,3 +1,5 @@
+import { ProjectInfo } from "../constants";
+
 export interface Wire {
     source: {
         block: string;
@@ -21,4 +23,17 @@ export interface Block {
         y: number
     },
     data: any
+}
+
+export interface ProjectDesign {
+    board: string;
+    graph: {
+        blocks: Block[];
+        wires: Wire[];
+    }
+}
+
+export interface Dependency {
+    package: ProjectInfo;
+    design: ProjectDesign;
 }

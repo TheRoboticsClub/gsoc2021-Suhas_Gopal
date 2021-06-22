@@ -26,7 +26,7 @@ export class ConstantBlockModel extends BaseModel<ConstantBlockData, NodeModelGe
         this.data = {
             name: options.name,
             value: '',
-            local: false
+            local: true
         }
 
         this.addPort(
