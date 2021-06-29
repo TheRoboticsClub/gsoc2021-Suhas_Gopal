@@ -80,6 +80,7 @@ export class CodeBlockWidget extends React.Component<CodeBlockWidgetProps, CodeB
                                         onWheel={this.blockScrollEvents}
                                         readOnly={state.locked}
                                         style={textAreaStyle}
+                                        spellCheck="false"
                                     />
                                 </div>
                                 <div className='block-basic-code-outputs'>

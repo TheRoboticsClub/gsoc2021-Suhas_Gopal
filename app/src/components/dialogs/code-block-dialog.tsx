@@ -21,18 +21,14 @@ const CodeBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<CodeBloc
             const inputs = inputPorts.split(',').filter((port) => Boolean(port)).map((port) => port.trim());
             const outputs = outputPorts.split(',').filter((port) => Boolean(port)).map((port) => port.trim());
             const params = parameters.split(',').filter((port) => Boolean(port)).map((port) => port.trim());
-            onResolve({inputs: inputs, outputs: outputs, params: params});
+            onResolve({ inputs: inputs, outputs: outputs, params: params });
         } else {
             setError('Code block needs atleast one Input or one Output')
         }
     }
 
     return (
-        <Dialog open={isOpen} aria-labelledby="form-dialog-title">
-
-            {error.length > 0 &&
-                <Alert severity="error">{error}</Alert>
-            }
+        <Dialog open={isOpen} aria-labelledby="form-dialog-title" fullWidth>
 
             <DialogContent>
                 <DialogContentText>
@@ -45,6 +41,8 @@ const CodeBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<CodeBloc
                     variant='outlined'
                     value={inputPorts}
                     onChange={(event) => setInputPorts(event.target.value)}
+                    error={Boolean(error)}
+                    helperText={error}
                     fullWidth
                 />
 
@@ -58,6 +56,8 @@ const CodeBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<CodeBloc
                     variant='outlined'
                     value={outputPorts}
                     onChange={(event) => setOutputPorts(event.target.value)}
+                    error={Boolean(error)}
+                    helperText={error}
                     fullWidth
                 />
 
@@ -71,7 +71,6 @@ const CodeBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<CodeBloc
                     variant='outlined'
                     value={parameters}
                     onChange={(event) => setParameters(event.target.value)}
-                    
                     fullWidth
                 />
 
@@ -79,10 +78,10 @@ const CodeBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<CodeBloc
             <DialogActions>
                 <Button onClick={() => onReject()}>
                     Cancel
-          </Button>
+                </Button>
                 <Button onClick={() => handleSubmit()}>
                     Ok
-          </Button>
+                </Button>
             </DialogActions>
         </Dialog>
     )

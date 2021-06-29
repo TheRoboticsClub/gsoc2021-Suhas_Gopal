@@ -1,23 +1,43 @@
+@import '../../../../variables';
+
 #board {
     .port-container {
         display: inline-block;
+        font-size: 10px;
+
         .custom-port {
             width: 15px;
             height: 15px;
             border-radius: 50%;
-        
-            &.custom-input-port {
-                background-color: red;
-            }
-        
-            &.custom-output-port {
-                background-color: green;
-            }
+            position: relative;
         
             &:hover {
                 cursor: pointer;
             }
 
+        }
+        &.right-aligned-port {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        &.bottom-aligned-port {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &.left-aligned-port {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &.top-aligned-port {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     }
 }
@@ -28,11 +48,15 @@
             .custom-port {
                 
                 &.custom-input-port {
-                    background-color: red;
+                    background-color: $dark-input-port;
                 }
             
                 &.custom-output-port {
-                    background-color: green;
+                    background-color: $dark-output-port;
+                }
+
+                &.custom-param-port {
+                    background-color: $dark-param-port;
                 }
             }
         }

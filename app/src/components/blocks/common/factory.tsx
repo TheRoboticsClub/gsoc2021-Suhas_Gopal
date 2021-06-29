@@ -1,6 +1,6 @@
 import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
 import { LinkModel, PortModel } from "@projectstorm/react-diagrams";
-import { DefaultPortModel, DefaultPortModelOptions } from "@projectstorm/react-diagrams-defaults";
+import { DefaultPortModel } from "@projectstorm/react-diagrams-defaults";
 import { RightAngleLinkModel } from "@projectstorm/react-diagrams-routing";
 import { PortTypes, ProjectInfo } from '../../../core/constants';
 import { ProjectDesign } from '../../../core/serialiser/interfaces';
@@ -13,7 +13,7 @@ import { InputBlockModel } from '../basic/input/input-model';
 import { OutputBlockModel } from '../basic/output/output-model';
 import { getCollectionBlock } from '../collection/collection-factory';
 import { PackageBlockModel } from '../package/package-model';
-import { BaseInputPortModel, BaseOutputPortModel, BaseParameterPortModel } from './base-port/port-model';
+import { BaseInputPortModel, BaseOutputPortModel, BaseParameterPortModel, BasePortModelOptions } from './base-port/port-model';
 
 
 export class RightAnglePortModel extends DefaultPortModel {
@@ -29,7 +29,7 @@ export class RightAnglePortModel extends DefaultPortModel {
 	}
 }
 
-export const createPortModel = (options: DefaultPortModelOptions) => {
+export const createPortModel = (options: BasePortModelOptions) => {
     // return new RightAnglePortModel(options);
     switch (options.type) {
         case PortTypes.INPUT:

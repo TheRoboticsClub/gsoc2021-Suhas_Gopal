@@ -1,6 +1,6 @@
 #board {
     .block-package {
-        width: 120px;
+        width: 130px;
         height: 100px;
 
         .grid-container {
@@ -24,7 +24,12 @@
                 overflow-y: auto;
 
                 .block-package-image {
-                    max-width: 100%;
+                    max-width: 40px;
+                    width: 90%;
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                 }
 
             }
