@@ -1,4 +1,4 @@
-import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
+import { AbstractModelFactory, Toolkit } from '@projectstorm/react-canvas-core';
 import { LinkModel, PortModel } from "@projectstorm/react-diagrams";
 import { DefaultPortModel } from "@projectstorm/react-diagrams-defaults";
 import { RightAngleLinkModel } from "@projectstorm/react-diagrams-routing";
@@ -44,13 +44,15 @@ export const createPortModel = (options: BasePortModelOptions) => {
     
 } 
 
-export const createBlock = async (name: string) => {
+export const createBlock = async (name: string, blockCount: number) => {
     var block;
     var data;
     try {
         switch (name) {
             case 'basic.constant':
                 data = await createConstantDialog({isOpen: true});
+                // This is workaround to indicate how blocks should be sorted
+                data.id = blockCount.toString().padStart(4, '0') + '-' + Toolkit.UID();
                 block = new ConstantBlockModel(data)
                 break;
             case 'basic.code':
