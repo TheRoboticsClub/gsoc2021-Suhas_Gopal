@@ -11,7 +11,7 @@ const ConstantBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<Cons
 
 
   const [name, setName] = useState('');
-  const [local, setLocal] = useState(false);
+  const [local, setLocal] = useState(true);
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -53,7 +53,7 @@ const ConstantBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<Cons
           control={
             <Checkbox
               color='default'
-              value={local}
+              checked={local}
               onChange={(event) => setLocal(event.target.checked)}
             />
           }
