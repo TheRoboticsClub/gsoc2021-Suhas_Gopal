@@ -56,7 +56,7 @@ const BasePort: React.FC<BasePortProps> = (props) => {
                 <PortWidget {...props}>
                     <div className={`custom-port ${portClass}`}></div>
                 </PortWidget>
-                {!port.getOptions().hideLabel && port.getOptions().label && <div>{port.getOptions().label}</div>}
+                {!port.hideLabel && port.getOptions().label && <div>{port.getOptions().label}</div>}
             </div>);
 }
 

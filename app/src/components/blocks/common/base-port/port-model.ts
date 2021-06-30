@@ -1,10 +1,18 @@
 import { DefaultLinkModel, DefaultPortModel, DefaultPortModelOptions, RightAngleLinkModel } from "@projectstorm/react-diagrams";
-import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
+import { AbstractModelFactory, DeserializeEvent } from '@projectstorm/react-canvas-core';
 import { LinkModel, PortModel } from "@projectstorm/react-diagrams";
 
 
 
 export class BasePortModel extends DefaultPortModel {
+
+    public hideLabel: boolean;
+
+    constructor(options: BasePortModelOptions) {
+        super(options);
+        this.hideLabel = options.hideLabel || false;
+    }
+
 	createLinkModel(_factory?: AbstractModelFactory<LinkModel>): LinkModel {
 		return new DefaultLinkModel();
 	}
@@ -18,6 +26,18 @@ export class BasePortModel extends DefaultPortModel {
 
     getOptions(): BasePortModelOptions {
         return this.options;
+    }
+
+    serialize() {
+        return {
+            ...super.serialize(),
+            hideLabel: this.hideLabel
+        };
+    }
+
+    deserialize(event: DeserializeEvent<this>): void {
+        super.deserialize(event);
+        this.hideLabel = event.data.hideLabel
     }
 }
 
