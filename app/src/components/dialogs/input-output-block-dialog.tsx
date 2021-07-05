@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { create, InstanceProps } from 'react-modal-promise';
 import { InputBlockModelOptions } from '../blocks/basic/input/input-model';
 
@@ -9,6 +9,22 @@ const IOBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<InputBlock
 
 
   const [name, setName] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (errorMsg) {
+      setErrorMsg('')
+    }
+    setName(event.target.value);
+  }
+
+  const handleSubmit = () => {
+    if (name) {
+      onResolve({ name: name })
+    } else {
+      setErrorMsg('Block name is mandatory');
+    }
+  }
 
   return (
     <Dialog open={isOpen} aria-labelledby="form-dialog-title">
@@ -23,7 +39,9 @@ const IOBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<InputBlock
           type="text"
           variant='outlined'
           value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={handleInput}
+          error={Boolean(errorMsg)}
+          helperText={errorMsg}
           fullWidth
         />
       </DialogContent>
@@ -31,7 +49,7 @@ const IOBlockDialog = ({ isOpen, onResolve, onReject }: InstanceProps<InputBlock
         <Button onClick={() => onReject()}>
           Cancel
           </Button>
-        <Button onClick={() => onResolve({ name: name })}>
+        <Button onClick={handleSubmit}>
           Ok
           </Button>
       </DialogActions>

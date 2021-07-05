@@ -8,11 +8,13 @@ import { PortTypes } from "../../../../core/constants";
 
 export interface ConstantBlockModelOptions extends BaseModelOptions {
     name: string;
+    local: boolean;
 }
 
 interface ConstantBlockData {
     name: string;
-    value: string
+    value: string;
+    local: boolean;
 }
 
 export class ConstantBlockModel extends BaseModel<ConstantBlockData, NodeModelGenerics & ConstantBlockModelOptions> {
@@ -34,8 +36,8 @@ export class ConstantBlockModel extends BaseModel<ConstantBlockData, NodeModelGe
 				in: false,
 				name: 'constant-out',
                 alignment: PortModelAlignment.BOTTOM,
-                label: 'constant-out',
-                type: PortTypes.OUTPUT
+                type: PortTypes.OUTPUT,
+                hideLabel: true
 			})
 		);
     }

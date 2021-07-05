@@ -21,6 +21,7 @@ class Editor {
     
     private stack: {model: DiagramModel, info: ProjectInfo, node: PackageBlockModel}[];
     private activeModel: DiagramModel;
+    private blockCount: number = 0;
 
     public engine: DiagramEngine;
 
@@ -89,7 +90,8 @@ class Editor {
     }
 
     public async addBlock(name: string): Promise<void> {
-        const block = await createBlock(name);
+        this.blockCount += 1;
+        const block = await createBlock(name, this.blockCount);
         if (block) {
             block.setPosition(...getInitialPosition())
             this.activeModel.addNode(block);

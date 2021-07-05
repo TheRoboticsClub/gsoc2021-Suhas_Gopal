@@ -38,7 +38,7 @@ export class PackageBlockModel extends BaseModel<PackageBlockData, NodeModelGene
                         in: true,
                         name: block.id,
                         alignment: PortModelAlignment.LEFT,
-                        label: block.id,
+                        label: block.data.name || block.id,
                         type: PortTypes.INPUT
                     })
                 );
@@ -49,7 +49,7 @@ export class PackageBlockModel extends BaseModel<PackageBlockData, NodeModelGene
                         in: false,
                         name: block.id,
                         alignment: PortModelAlignment.RIGHT,
-                        label: block.id,
+                        label: block.data.name || block.id,
                         type: PortTypes.OUTPUT
                     })
                 );

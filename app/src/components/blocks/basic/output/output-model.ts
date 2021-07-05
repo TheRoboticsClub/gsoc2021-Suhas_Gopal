@@ -28,7 +28,7 @@ export class OutputBlockModel extends BaseModel<OutputBlockData, NodeModelGeneri
 				in: true,
 				name: 'output-in',
                 alignment: PortModelAlignment.LEFT,
-                label: 'output-in',
+                hideLabel: true,
                 type: PortTypes.INPUT
 			})
 		);
