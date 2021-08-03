@@ -17,3 +17,8 @@ VisualCircuit allows users to program robotic intelligence using a visual langua
 
 - Make a web app that has all the functionalities as the original desktop app.
 - Add a django based wrapper to the existing backend so that it can communicate with the web-app.
+
+
+**Mentors:**
+* Muhammad Taha Suhail
+* Jose Maria Cañas
