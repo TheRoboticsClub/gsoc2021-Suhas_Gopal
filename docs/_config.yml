@@ -34,6 +34,7 @@ minimal_mistakes_skin: sunrise
 plugins:
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-paginate-v2
 
 
 
@@ -57,3 +58,21 @@ logo: "/assets/images/logo.png"
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+pagination:
+  
+  # Site-wide kill switch, disabled here it doesn't run at all 
+  enabled: true
+  sort_reverse: true
+  per_page: 5
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      breadcrumbs: true
+      read_time: true
+
+
