@@ -23,7 +23,7 @@ In this application, a video file is taken as input and EdgeDetector and ObjDete
 
 I also moved all the new code to an orphan branch, named 'VisualCircuit3' under the main repo [VisualCircuit](https://github.com/JdeRobot/VisualCircuit)
 
-All future developments will be done againts this branch in the main repo.
+All future developments will be done against this branch in the main repo.
 
 Pull request:
 [https://github.com/JdeRobot/VisualCircuit/pull/84](https://github.com/JdeRobot/VisualCircuit/pull/84)
