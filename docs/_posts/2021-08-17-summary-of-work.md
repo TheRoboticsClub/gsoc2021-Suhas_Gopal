@@ -55,3 +55,9 @@ After GSOC, main work would be in making the backend stable and developing diffe
 9. Tutorial page for VisualCircuit3 [#99](https://github.com/JdeRobot/VisualCircuit/pull/99) ![PR merged]({{ site.baseurl }}/assets/images/recap/git-merge.svg) 
 10. Submit VC model json from frontend [#104](https://github.com/JdeRobot/VisualCircuit/pull/104) ![PR merged]({{ site.baseurl }}/assets/images/recap/git-merge.svg) 
 11. Generate Python application from VC file [#106](https://github.com/JdeRobot/VisualCircuit/pull/106) ![PR merged]({{ site.baseurl }}/assets/images/recap/git-merge.svg) 
+
+
+### Other videos
+1. VisualCircuit3 - [Teaser](https://youtu.be/cWnsCskuc7M)
+2. Designing an application on VisualCircuit3 - [Tutorial](https://youtu.be/uK725Y-Y9_c)
+3. Building a custom block on VisualCircuit3 - [Tutorial](https://youtu.be/haW_oEOjKh8)
