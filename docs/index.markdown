@@ -9,8 +9,6 @@ header:
   overlay_image: /assets/images/splash-home.png
 excerpt: 
   Shifting VisualCircuit to Web
-pagination: 
-  enabled: true
 ---
 
 
@@ -28,6 +26,11 @@ VisualCircuit allows users to program robotic intelligence using a visual langua
 <li>Muhammad Taha Suhail</li>
 <li>Jose Maria Cañas</li>
 </ul>
+
+**Official Repository:** [VisualCircuit](https://github.com/JdeRobot/VisualCircuit/tree/VisualCircuit3)  
+**Github Issues**: [Summary](https://github.com/JdeRobot/VisualCircuit/issues?q=is%3Aissue+author%3ASuhas-G)  
+**Pull Requests:** [Summary](https://github.com/JdeRobot/VisualCircuit/pulls?q=is%3Apr+author%3ASuhas-G)  
+
 
 
 
